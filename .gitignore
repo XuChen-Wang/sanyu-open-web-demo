@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+*.local
+
+# env (keep examples)
+.env
+.env.*.local
+
+# logs / OS / IDE
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# misc
+coverage/
+.cache/

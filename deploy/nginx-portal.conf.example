@@ -1,0 +1,27 @@
+# 三域聚合门户（zzj-open-web）history 路由示例
+# 关键：把 root 改成实际 dist 目录；/api 反代到 web-api
+
+server {
+    listen 80;
+    server_name www.sanyu366.com sanyu366.com;
+    root /var/www/sanyu366/web/dist;
+    index index.html;
+
+    # 静态资源与 SEO 文件优先命中真实文件
+    location = /robots.txt { }
+    location = /sitemap.xml { }
+
+    # 门户 API（按实际 upstream 调整）
+    location /api/ {
+        proxy_pass http://127.0.0.1:8511/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # SPA history：刷新 /explore、/console 等不 404
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /console
+Disallow: /console/
+
+Sitemap: https://www.sanyu366.com/sitemap.xml
